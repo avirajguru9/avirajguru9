@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -36,6 +37,8 @@ import com.avi.webflux6.stocktrading.repository.StockRepository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+@CrossOrigin(origins="http://localhost:4200")
+//@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/stocks")
 public class StockController {
@@ -60,12 +63,12 @@ public class StockController {
 	@PostMapping("addstock")
 	public Object addStock(@RequestBody Stock stock){
 		Stock save = this.stockRepo.save(stock);
-		URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/stocks/getstock/{id}").buildAndExpand(save.getId()).toUri();
-		//return this.getStock(save.getId());
+//		URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/stocks/getstock/{id}").buildAndExpand(save.getId()).toUri();
+		return this.getStock(save.getId());
 		//URI location = ServletUriComponentsBuilder.fromRequestUri(this.getStock(save.getId())).path("/{id}").buildAndExpand(save.getId()).toUri();
 		//return ResponseEntity.created(location).body(stockRepo);
-		ResponseEntity<?> responseEntity = restTemplate.getForEntity(location, String.class);		
-		return responseEntity.getBody();
+//		ResponseEntity<?> responseEntity = restTemplate.getForEntity(location, String.class);		
+//		return responseEntity.getBody();
 	}
 	
 	@PutMapping("updatestock/{id}")
@@ -254,6 +257,9 @@ public class StockController {
 		List<String> list = new ArrayList<String>(Arrays.asList(sent.split(" ")));
 		//List<String> list = Arrays.asList("a","a","b","c","b");
 		List<String> dList = list.stream().distinct().collect(Collectors.toList());
-		System.out.println(dList);		
+		System.out.println(dList);
+		
+		int[] records = new int[] { 1, 2, 0, 5, 0, 2, 4, 3, 3, 3 };
+        System.out.println(Arrays.toString(records));
 	}
 }
