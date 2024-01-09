@@ -31,8 +31,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import com.avi.webflux6.stocktrading.entity.Stock;
+import com.avi.webflux6.stocktrading.model.Stock;
 import com.avi.webflux6.stocktrading.repository.StockRepository;
+import com.avi.webflux6.stocktrading.repository.StockWebFluxRepository;
+import com.avi.webflux6.stocktrading.service.StockService;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -46,18 +48,15 @@ public class StockController {
 	@Autowired
 	private StockRepository stockRepo;
 	
+	
+	
 	private final RestTemplate restTemplate;
+	
 
     @Autowired
     public StockController(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
-    }	
-	
-	@GetMapping("/{id}")
-	public Mono<Stock> getOneStock(@PathVariable String id){
-		 //return Mono.just(Stock.builder().Id("Stock - "+id).build());
-		return null;
-	}
+    }
 	
 	@PostMapping("addstock")
 	public Object addStock(@RequestBody Stock stock){

@@ -3,6 +3,7 @@ package com.avi.webflux6.stocktrading.contoller;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -174,5 +175,22 @@ public class PracticeController {
 		
 		int[] records = new int[] { 1, 2, 0, 5, 0, 2, 4, 3, 3, 3 };
         System.out.println(Arrays.toString(records));
+	}
+	
+	@GetMapping("reversearray")
+	public void reverseArray() {
+		String[] strArray = {"h", "e", "l", "l", "o"};
+		int siz = strArray.length;
+		String temp;
+		for(int i = 0, j = siz-1; i < j; i++, j--) {
+			temp = strArray[i];
+			strArray[i] = strArray[j];
+			strArray[j] = temp;
+		}
+		System.out.println(Arrays.toString(strArray));
+		
+//		Java 8 
+//		Collections.reverse(Arrays.asList(strArray));
+//		System.out.println(Arrays.toString(strArray));
 	}
 }

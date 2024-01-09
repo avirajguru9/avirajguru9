@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.avi.webflux6.stocktrading.model.Department;
 import com.avi.webflux6.stocktrading.repository.DepartmentRepository;
-import com.avi.webflux6.stocktrading.entity.Department;
 
 @RestController
 @RequestMapping("/depart")
