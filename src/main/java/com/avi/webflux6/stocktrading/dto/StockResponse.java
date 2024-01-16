@@ -1,5 +1,7 @@
 package com.avi.webflux6.stocktrading.dto;
 
+import java.math.BigDecimal;
+
 import com.avi.webflux6.stocktrading.model.Stock;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -16,7 +18,7 @@ public class StockResponse {
 	private String id;
 	@JsonProperty("stockname")
 	private String name;
-	private int price;
+	private BigDecimal price;
 	private String date;
 	
 	public static StockResponse fromModel(Stock stock) {

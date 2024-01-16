@@ -21,6 +21,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.*;
 import java.lang.reflect.Array;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -80,7 +81,7 @@ public class StockController {
 	}
 	
 	@PatchMapping("updateprice/{id}")
-	public ResponseEntity<Stock> updateStockPrice(@PathVariable String id, @RequestParam("price") int price){
+	public ResponseEntity<Stock> updateStockPrice(@PathVariable String id, @RequestParam("price") BigDecimal price){
 		Stock updateStock = stockRepo.findById(id).orElseThrow(()-> new NoSuchElementException ("Stock not fund with id"+id));
 		updateStock.setPrice(price);
 		this.stockRepo.save(updateStock);
