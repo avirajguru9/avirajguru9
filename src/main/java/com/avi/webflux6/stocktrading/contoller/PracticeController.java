@@ -4,13 +4,18 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.avi.webflux6.stocktrading.model.Employee;
 
 @RestController
 @RequestMapping("/practice")
@@ -193,4 +198,39 @@ public class PracticeController {
 //		Collections.reverse(Arrays.asList(strArray));
 //		System.out.println(Arrays.toString(strArray));
 	}
+	
+	@GetMapping("get_sorting")
+	public void getSorting() {
+//		List<Integer> intList = [1,5,6,2,4];
+//		List<Integer> outList = intList.stream().sorted().collect(Collectors.toList());
+		
+		Stream().map(x->x<10).forEach(System.out::println);
+		
+	}
+	
+	@GetMapping("get_custom_sorting")
+	public List<Employee> getEmpDept(){
+		Employee emp = new Employee("1", "abc", 10, "Admin");
+		Employee emp1 = new Employee("2", "xyz", 12, "Sales");
+		Employee emp2 = new Employee("2", "xyz", 12, "HR");
+		Employee emp3 = new Employee("2", "xyz", 12, "IT");
+		List<Employee> empL = new ArrayList<>();
+		List<Employee> empR = new ArrayList<>();
+		empL.add(emp);
+		empL.add(emp1);
+		empL.add(emp2);
+		empL.add(emp3);
+		List<String> deptSort = new ArrayList<>();
+		deptSort.add("IT");
+		deptSort.add("Admin");
+		deptSort.add("Sales");
+		deptSort.add("HR");
+		empL.sort(Comparator.comparing(e -> deptSort.indexOf(e.getDepartment())));
+//		empL.stream().collect(Comparator.comparing(e->deptSort.indexOf(e.getDepartment())));
+		
+		empL.forEach(System.out::println);
+		return empL;
+		
+	}
+	
 }
