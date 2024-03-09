@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -233,4 +234,49 @@ public class PracticeController {
 		
 	}
 	
+	/*
+	 * o/p
+	 * {p=>Prasad,k=>Kiruba}
+	 */
+	@GetMapping("get_char_string")
+	public void getCharString() {
+		List<String> objList1 = new ArrayList<String>();
+		objList1.add("Prasad");
+		objList1.add("Kiruba");
+		
+		Map<Object,Object> result = objList1.stream()
+				.collect(Collectors.toMap(v->v.charAt(0), val->val));
+		System.out.println(result);
+	}
+	
+	/*
+	 * count values present in list
+	 * o/p
+	 * CD: 3
+		SD Card:1
+		Mouse:2
+		Pen Drive: 2
+	 */
+	@GetMapping("get_count_values_list")
+	public void getCountOfValuesInList() {
+		List<String> listOfStrings = Arrays.asList("CD", "SD Card",
+				"Mouse", "CD", "Pen Drive",
+				"CD", "Mouse", "Pen Drive");
+		
+		Map<String, Long> result = listOfStrings.stream(
+				).collect(Collectors.groupingBy(s->s,Collectors.counting()));
+		System.out.println(result);
+	}
+	
+	/*
+	 * List<Integer> myList = Arrays.asList(100,115,108,149,225,198,100,320);
+	 * o/p = get num start with 1
+	 */
+	
+	@GetMapping("get_num_start")
+	public void getNumStart() {
+		List<Integer> myList = Arrays.asList(100,115,108,149,225,198,100,320);
+		List<Integer> result = myList.stream().filter(n->n.toString().startsWith("1")).sorted(Comparator.naturalOrder()).toList();
+		System.out.println(result);
+	}
 }
