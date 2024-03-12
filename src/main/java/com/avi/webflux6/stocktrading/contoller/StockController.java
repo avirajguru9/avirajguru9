@@ -29,6 +29,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.function.Predicate;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -102,4 +104,16 @@ public class StockController {
 	public void deleteStock(@PathVariable String id){
 		stockRepo.deleteById(id);
 	}
+	
+	@GetMapping("getstockmatch")
+	public boolean getStockMatch(){
+		
+		Predicate<Stock> getStockGreaterThan200 = t -> t.getPrice().intValue()>200;
+		
+		
+		
+		return stockRepo.findAll().stream()
+		.allMatch(getStockGreaterThan200);
+	}
+	
 }

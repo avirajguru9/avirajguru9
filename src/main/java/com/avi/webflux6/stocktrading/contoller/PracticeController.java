@@ -193,4 +193,17 @@ public class PracticeController {
 //		Collections.reverse(Arrays.asList(strArray));
 //		System.out.println(Arrays.toString(strArray));
 	}
+	
+	@GetMapping("pattern")
+	public void patternPrint() {
+		char[] str = "VenkataSiva".toCharArray();
+		int len = str.length;
+
+		for(int i=len;i>=1;i--){
+			for(int j=1;j<i;j++){
+				System.out.print(str[j-1]);
+			}
+			System.out.println();
+		}
+	}
 }
