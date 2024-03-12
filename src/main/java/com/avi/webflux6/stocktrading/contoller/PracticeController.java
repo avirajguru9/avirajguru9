@@ -4,13 +4,19 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.avi.webflux6.stocktrading.model.Employee;
 
 @RestController
 @RequestMapping("/practice")
@@ -205,5 +211,85 @@ public class PracticeController {
 			}
 			System.out.println();
 		}
+	}
+	
+	@GetMapping("get_sorting")
+	public void getSorting() {
+//		List<Integer> intList = [1,5,6,2,4];
+//		List<Integer> outList = intList.stream().sorted().collect(Collectors.toList());
+		
+//		Stream().map(x->x<10).forEach(System.out::println);
+		
+	}
+	
+	@GetMapping("get_custom_sorting")
+	public List<Employee> getEmpDept(){
+		Employee emp = new Employee("1", "abc", 10, "Admin");
+		Employee emp1 = new Employee("2", "xyz", 12, "Sales");
+		Employee emp2 = new Employee("2", "xyz", 12, "HR");
+		Employee emp3 = new Employee("2", "xyz", 12, "IT");
+		List<Employee> empL = new ArrayList<>();
+		List<Employee> empR = new ArrayList<>();
+		empL.add(emp);
+		empL.add(emp1);
+		empL.add(emp2);
+		empL.add(emp3);
+		List<String> deptSort = new ArrayList<>();
+		deptSort.add("IT");
+		deptSort.add("Admin");
+		deptSort.add("Sales");
+		deptSort.add("HR");
+		empL.sort(Comparator.comparing(e -> deptSort.indexOf(e.getDepartment())));
+//		empL.stream().collect(Comparator.comparing(e->deptSort.indexOf(e.getDepartment())));
+		
+		empL.forEach(System.out::println);
+		return empL;
+		
+	}
+	
+	/*
+	 * o/p
+	 * {p=>Prasad,k=>Kiruba}
+	 */
+	@GetMapping("get_char_string")
+	public void getCharString() {
+		List<String> objList1 = new ArrayList<String>();
+		objList1.add("Prasad");
+		objList1.add("Kiruba");
+		
+		Map<Object,Object> result = objList1.stream()
+				.collect(Collectors.toMap(v->v.charAt(0), val->val));
+		System.out.println(result);
+	}
+	
+	/*
+	 * count values present in list
+	 * o/p
+	 * CD: 3
+		SD Card:1
+		Mouse:2
+		Pen Drive: 2
+	 */
+	@GetMapping("get_count_values_list")
+	public void getCountOfValuesInList() {
+		List<String> listOfStrings = Arrays.asList("CD", "SD Card",
+				"Mouse", "CD", "Pen Drive",
+				"CD", "Mouse", "Pen Drive");
+		
+		Map<String, Long> result = listOfStrings.stream(
+				).collect(Collectors.groupingBy(s->s,Collectors.counting()));
+		System.out.println(result);
+	}
+	
+	/*
+	 * List<Integer> myList = Arrays.asList(100,115,108,149,225,198,100,320);
+	 * o/p = get num start with 1
+	 */
+	
+	@GetMapping("get_num_start")
+	public void getNumStart() {
+		List<Integer> myList = Arrays.asList(100,115,108,149,225,198,100,320);
+		List<Integer> result = myList.stream().filter(n->n.toString().startsWith("1")).sorted(Comparator.naturalOrder()).toList();
+		System.out.println(result);
 	}
 }

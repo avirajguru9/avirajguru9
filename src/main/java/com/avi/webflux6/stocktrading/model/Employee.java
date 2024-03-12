@@ -22,8 +22,8 @@ public class Employee {
 //	@Field("deptname") @DocumentReference(lazy = true,lookup = "{'name' : ?#{#self._id}}") 
 //	private Department dname;
 	
-	@DocumentReference
-    private Department dname;
+//	@DocumentReference
+//    private Department dname;
 	
 	public String getId() {
 		return id;
@@ -51,16 +51,16 @@ public class Employee {
 		this.department = department;
 	}
 	
-	public Department getDname() {
-		return dname;
-	}
-	public void setDname(Department dname) {
-		this.dname = dname;
-	}
-	@Override
-	public String toString() {
-		return "Employee [id=" + id + ", name=" + name + ", salary=" + salary + ", department=" + department
-				+ ", dname=" + dname + "]";
-	}
+//	public Department getDname() {
+//		return dname;
+//	}
+//	public void setDname(Department dname) {
+//		this.dname = dname;
+//	}
+//	@Override
+//	public String toString() {
+//		return "Employee [id=" + id + ", name=" + name + ", salary=" + salary + ", department=" + department
+//				+ ", dname=" + dname + "]";
+//	}
 	
 }
