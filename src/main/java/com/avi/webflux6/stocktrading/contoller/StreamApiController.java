@@ -1,5 +1,7 @@
 package com.avi.webflux6.stocktrading.contoller;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -195,5 +197,49 @@ public class StreamApiController {
 		};
 	}
 	
+	/*
+	 * o/p -> rajguru avinash
+	 */
+	@GetMapping("reversestence")
+	public void reverseStence() {
+		String input = "avinash rajguru";
+
+        // Split the input string into words
+        List<String> words = Arrays.asList(input.split(" "));
+
+        // Reverse the order of words
+        Collections.reverse(words);
+
+        // Join the words back together
+        String reversed = words.stream().collect(Collectors.joining(" "));
+
+        // Print the reversed string
+        System.out.println("Reversed string: " + reversed);
+	}
+	
+	/*
+	 * o/p -> Counts of repeated characters:
+		 : 1
+		d: 1
+		e: 1
+		h: 1
+		l: 3
+		o: 2
+		r: 1
+		w: 1
+	 */
+	@GetMapping("countrepeatedchar")
+	public void countRepeatedChar() {
+		 String input = "hello world";
+
+        // Count the repeated characters
+        Map<Character, Long> counts = input.chars()
+                .mapToObj(c -> (char) c)
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+        // Print the counts
+        System.out.println("Counts of repeated characters:");
+        counts.forEach((character, count) -> System.out.println(character + ": " + count));
+	}
 	
 }
