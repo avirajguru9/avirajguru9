@@ -1,5 +1,6 @@
 package com.avi.webflux6.stocktrading.contoller;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collector;
@@ -44,11 +45,13 @@ public class EmployeeController{
 	@GetMapping("/getempbydept")
 	public List<Employee> getEmpByDept() {
 		List<Employee> allEmp = empRepo.findAll();
+		List<String> custList = new ArrayList<>();
+		custList.add("");
 //		allEmp.stream().map();
-//		List<Employee> sortedAllEmp = allEmp.stream().sorted(Comparator.comparing(Employee::getDepartment, Comparator.reverseOrder())
-//				.thenComparing(Employee::getSalary, Comparator.reverseOrder())				
-//				).collect(Collectors.toList());
-		return allEmp;
+		List<Employee> sortedAllEmp = allEmp.stream().sorted(Comparator.comparing(Employee::getDepartment, Comparator.reverseOrder())
+				.thenComparing(Employee::getSalary, Comparator.reverseOrder())				
+				).collect(Collectors.toList());
+		return sortedAllEmp;
 	}
 	
 	@GetMapping("/sort_emp")

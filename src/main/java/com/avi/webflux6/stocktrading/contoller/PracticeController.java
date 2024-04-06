@@ -200,12 +200,25 @@ public class PracticeController {
 //		System.out.println(Arrays.toString(strArray));
 	}
 	
+	@GetMapping("pattern")
+	public void patternPrint() {
+		char[] str = "VenkataSiva".toCharArray();
+		int len = str.length;
+
+		for(int i=len;i>=1;i--){
+			for(int j=1;j<i;j++){
+				System.out.print(str[j-1]);
+			}
+			System.out.println();
+		}
+	}
+	
 	@GetMapping("get_sorting")
 	public void getSorting() {
 //		List<Integer> intList = [1,5,6,2,4];
 //		List<Integer> outList = intList.stream().sorted().collect(Collectors.toList());
 		
-		Stream().map(x->x<10).forEach(System.out::println);
+//		Stream().map(x->x<10).forEach(System.out::println);
 		
 	}
 	
