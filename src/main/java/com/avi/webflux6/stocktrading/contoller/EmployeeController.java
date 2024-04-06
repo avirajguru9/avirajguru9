@@ -50,5 +50,16 @@ public class EmployeeController{
 //				).collect(Collectors.toList());
 		return allEmp;
 	}
+	
+	@GetMapping("/sort_emp")
+	public List<Employee> sortEmp() {
+		List<Employee> allEmp = empRepo.findAll();
+		allEmp.sort(Comparator
+				.comparing(Employee::getName)
+				.thenComparing(Employee::getSalary)
+				.thenComparing(Employee::getId)
+				);
+		return allEmp;
+	}
 }
 
